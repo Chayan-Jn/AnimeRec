@@ -1,110 +1,194 @@
-*{
+* {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
-}
-.main{
-    height: 100vh;
+  }
+  
+  .main {
+    min-height: 100vh;
     width: 100vw;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-image:url('https://images2.alphacoders.com/748/thumbbig-748209.webp');
+    background-image: url('https://images2.alphacoders.com/748/thumbbig-748209.webp');
     background-size: cover;
-    
-}
-.form{
-    height: 10vh;
+    background-position: center;
+    padding: 1rem;
+  }
+  
+  .form {
     width: 90%;
+    max-width: 600px;
     display: flex;
     align-items: center;
     justify-content: center;
-    background:linear-gradient(135deg,crimson,gold) ;
-}
-.form > input{
-    height: 50%;
+    background: linear-gradient(135deg, crimson, gold);
+    border-radius: 10px;
+    padding: 0.5rem 1rem;
+    gap: 0.5rem;
+    flex-wrap: nowrap;
+  }
+  
+  .form > input {
+    flex: 1;
+    height: 3rem;
     text-align: center;
     font-weight: bold;
     font-family: 'Times New Roman', Times, serif;
-    font-size: 2rem;
-}
-.form > button{
-    height: 50%;
-    border-radius: 10%;
-    margin: 1rem;
-    font-weight: bold;
-    background: linear-gradient(110deg,cadetblue,red);
-    color:white;
-    padding: 1rem;
+    font-size: 1.5rem;
     border: none;
-}
-.form > button:hover{
+    border-radius: 5px;
+  }
+  
+  .form > button {
+    height: 3rem;
+    border-radius: 10%;
+    font-weight: bold;
+    background: linear-gradient(110deg, cadetblue, red);
+    color: white;
+    padding: 0 1rem;
+    border: none;
+    cursor: pointer;
+    transition: opacity 0.3s ease;
+    white-space: nowrap;
+  }
+  
+  .form > button:hover {
     opacity: 0.8;
-}
-.recom-container{
+  }
+  
+  .recom-container {
     display: flex;
     align-items: center;
     justify-content: center;
     width: 90vw;
+    max-width: 600px;
     height: 3rem;
-
-
-}
-.to-recom{
-    background:none;
+    margin-top: 0.5rem;
+    border-radius: 5px;
+    overflow: hidden;
+  }
+  
+  .to-recom {
+    background: none;
     text-align: center;
     font-weight: bold;
     padding: 1rem;
     color: white;
-    font-size: 3rem;
-}
-.searching{
+    font-size: 2.5rem;
+    max-width: 90vw;
+    max-width: 600px;
+    word-wrap: break-word;
+  }
+  
+  .searching {
     background-color: crimson;
     color: white;
     font-weight: bold;
     margin-top: 10vh;
-    font-weight: bold;
     font-size: 2rem;
     padding: 1rem;
     opacity: 0.9;
     animation: searching_animation 1s linear infinite;
-}
-@keyframes searching_animation {
-    0%{
-        background-color: gold;
-        box-shadow: 10px 10px 10px rgb(211, 206, 206);
-    }
-    100%{
-        background-color: crimson;
-        box-shadow: 1px 1px 1px rgb(227, 222, 222);
-    }
-}
-.key{
-    flex:1;
-    max-width: 5rem;
+    border-radius: 6px;
+    max-width: 90vw;
     text-align: center;
-    background:linear-gradient(100deg,rgb(155, 32, 32),gold);
-    color: white;
-    height: 100%;
+  }
+  
+  @keyframes searching_animation {
+    0% {
+      background-color: gold;
+      box-shadow: 10px 10px 10px rgb(211, 206, 206);
+    }
+    100% {
+      background-color: crimson;
+      box-shadow: 1px 1px 1px rgb(227, 222, 222);
+    }
+  }
+  
+  .key {
+    flex: 1;
+    max-width: 7rem;
+    text-align: center;
+    background: linear-gradient(100deg, rgb(155, 32, 32), gold);
     font-weight: bold;
-    font-size: 2rem;
-    color:black;
-
-}
-.value{
-    flex:1;
-    background:linear-gradient(140deg,crimson,gold) ;
-    color:black;
+    font-size: 1.5rem;
+    color: black;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 0.3rem;
+  }
+  
+  .value {
+    flex: 2;
+    background: linear-gradient(140deg, crimson, gold);
     white-space: nowrap;
-    overflow:hidden; /* has to use overfow to max text-overflow work */
+    overflow: hidden;
     text-overflow: ellipsis;
     height: 100%;
     font-weight: bold;
     color: wheat;
     letter-spacing: 1px;
-    padding-left: 2rem;
-    font-size: 1.5rem;
+    padding-left: 1rem;
+    font-size: 1.2rem;
     font-family: 'Times New Roman', Times, serif;
     opacity: 0.95;
-}
+    display: flex;
+    align-items: center;
+  }
+  
+  /* MOBILE RESPONSIVE STYLES */
+  @media (max-width: 600px) {
+    .form {
+      flex-direction: column;
+      height: auto;
+      padding: 1rem;
+    }
+  
+    .form > input,
+    .form > button {
+      width: 100%;
+      height: 3.5rem;
+      font-size: 1.3rem;
+    }
+  
+    .form > button {
+      margin-top: 0.5rem;
+    }
+    
+    .to-recom {
+      font-size: 1.8rem;
+      padding: 0.7rem;
+    }
+  
+    .recom-container {
+      flex-direction: column;
+      height: auto;
+      padding: 0.5rem 0;
+      align-items: flex-start;
+    }
+  
+    .key,
+    .value {
+      max-width: 100%;
+      flex: none;
+      font-size: 1.2rem;
+      padding: 0.2rem 0.5rem;
+      white-space: normal;
+      width: 100%;
+    }
+  
+    .value {
+      padding-left: 0.5rem;
+    }
+  
+    .searching {
+      font-size: 1.5rem;
+      margin-top: 5vh;
+      padding: 0.7rem;
+    }
+  }
+  
