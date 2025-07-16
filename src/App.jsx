@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import "./app.css";
 
 const App = () => {
@@ -6,8 +6,11 @@ const App = () => {
   const [recom, setRecom] = useState(null);
   const [searched, setSearched] = useState(false);
 
-  // Add this state to control arrow visibility
-  const [showArrow, setShowArrow] = useState(true);
+  // Control arrow visibility
+  const [showArrow, setShowArrow] = useState(false);
+
+  // Ref to the scrollable container to measure scroll heights
+  const containerRef = useRef(null);
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -22,29 +25,40 @@ const App = () => {
         );
         const data = await response.json();
         setRecom(data);
-        setShowArrow(true); // Reset arrow visibility on new data
+        // Arrow visibility will be set by useEffect below after render
       } catch (err) {
         console.log("Error fetching recommendation ", err);
       }
     }
   }
+
+  // Update arrow visibility whenever recom changes and component updates
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+
+    // Determine if scrolling is possible
+    const canScroll = el.scrollHeight > el.clientHeight;
+    setShowArrow(canScroll);
+  }, [recom]);
+
   function handleScroll(e) {
     const target = e.currentTarget;
-      // If no scrollable overflow, hide arrow immediately
-      if (target.scrollHeight <= target.clientHeight) {
-          setShowArrow(false);
-          return;
-      }
+
+    // If no scroll overflow, hide arrow immediately
+    if (target.scrollHeight <= target.clientHeight) {
+      setShowArrow(false);
+      return;
+    }
 
     const distanceFromBottom = target.scrollHeight - (target.scrollTop + target.clientHeight);
-  
-    // Define threshold as a % of total scroll height, e.g., 10%
+
+    // Define threshold as 30% of total scroll height
     const threshold = target.scrollHeight * 0.30;
-  
-    // Hide arrow when scrolled within `threshold` distance of bottom
+
+    // Show arrow only if scrolled more than threshold away from bottom
     setShowArrow(distanceFromBottom > threshold);
   }
-  
 
   return (
     <div className="main">
@@ -61,7 +75,12 @@ const App = () => {
       </form>
 
       {recom && (
-        <div className="results-wrapper" id="resultsWrapper" onScroll={handleScroll}>
+        <div
+          className="results-wrapper"
+          id="resultsWrapper"
+          onScroll={handleScroll}
+          ref={containerRef}
+        >
           <div className="to-recom">Recommendations for {anime} are</div>
           {Object.entries(recom).map(([key, value]) => (
             <div className="recom-container" key={value}>
