@@ -1,0 +1,110 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+.main{
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-image:url('https://images2.alphacoders.com/748/thumbbig-748209.webp');
+    background-size: cover;
+    
+}
+.form{
+    height: 10vh;
+    width: 90%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background:linear-gradient(135deg,crimson,gold) ;
+}
+.form > input{
+    height: 50%;
+    text-align: center;
+    font-weight: bold;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 2rem;
+}
+.form > button{
+    height: 50%;
+    border-radius: 10%;
+    margin: 1rem;
+    font-weight: bold;
+    background: linear-gradient(110deg,cadetblue,red);
+    color:white;
+    padding: 1rem;
+    border: none;
+}
+.form > button:hover{
+    opacity: 0.8;
+}
+.recom-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 90vw;
+    height: 3rem;
+
+
+}
+.to-recom{
+    background:none;
+    text-align: center;
+    font-weight: bold;
+    padding: 1rem;
+    color: white;
+    font-size: 3rem;
+}
+.searching{
+    background-color: crimson;
+    color: white;
+    font-weight: bold;
+    margin-top: 10vh;
+    font-weight: bold;
+    font-size: 2rem;
+    padding: 1rem;
+    opacity: 0.9;
+    animation: searching_animation 1s linear infinite;
+}
+@keyframes searching_animation {
+    0%{
+        background-color: gold;
+        box-shadow: 10px 10px 10px rgb(211, 206, 206);
+    }
+    100%{
+        background-color: crimson;
+        box-shadow: 1px 1px 1px rgb(227, 222, 222);
+    }
+}
+.key{
+    flex:1;
+    max-width: 5rem;
+    text-align: center;
+    background:linear-gradient(100deg,rgb(155, 32, 32),gold);
+    color: white;
+    height: 100%;
+    font-weight: bold;
+    font-size: 2rem;
+    color:black;
+
+}
+.value{
+    flex:1;
+    background:linear-gradient(140deg,crimson,gold) ;
+    color:black;
+    white-space: nowrap;
+    overflow:hidden; /* has to use overfow to max text-overflow work */
+    text-overflow: ellipsis;
+    height: 100%;
+    font-weight: bold;
+    color: wheat;
+    letter-spacing: 1px;
+    padding-left: 2rem;
+    font-size: 1.5rem;
+    font-family: 'Times New Roman', Times, serif;
+    opacity: 0.95;
+}
