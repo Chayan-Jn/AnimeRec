@@ -30,10 +30,16 @@ const App = () => {
   }
   function handleScroll(e) {
     const target = e.currentTarget;
+      // If no scrollable overflow, hide arrow immediately
+      if (target.scrollHeight <= target.clientHeight) {
+          setShowArrow(false);
+          return;
+      }
+
     const distanceFromBottom = target.scrollHeight - (target.scrollTop + target.clientHeight);
   
     // Define threshold as a % of total scroll height, e.g., 10%
-    const threshold = target.scrollHeight * 0.35;
+    const threshold = target.scrollHeight * 0.30;
   
     // Hide arrow when scrolled within `threshold` distance of bottom
     setShowArrow(distanceFromBottom > threshold);
