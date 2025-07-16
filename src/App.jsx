@@ -6,6 +6,9 @@ const App = () => {
   const [recom, setRecom] = useState(null);
   const [searched, setSearched] = useState(false);
 
+  // Add this state to control arrow visibility
+  const [showArrow, setShowArrow] = useState(true);
+
   async function handleSubmit(e) {
     e.preventDefault();
     setRecom(null);
@@ -19,11 +22,23 @@ const App = () => {
         );
         const data = await response.json();
         setRecom(data);
+        setShowArrow(true); // Reset arrow visibility on new data
       } catch (err) {
         console.log("Error fetching recommendation ", err);
       }
     }
   }
+  function handleScroll(e) {
+    const target = e.currentTarget;
+    const distanceFromBottom = target.scrollHeight - (target.scrollTop + target.clientHeight);
+  
+    // Define threshold as a % of total scroll height, e.g., 10%
+    const threshold = target.scrollHeight * 0.35;
+  
+    // Hide arrow when scrolled within `threshold` distance of bottom
+    setShowArrow(distanceFromBottom > threshold);
+  }
+  
 
   return (
     <div className="main">
@@ -40,7 +55,7 @@ const App = () => {
       </form>
 
       {recom && (
-        <div className="results-wrapper">
+        <div className="results-wrapper" id="resultsWrapper" onScroll={handleScroll}>
           <div className="to-recom">Recommendations for {anime} are</div>
           {Object.entries(recom).map(([key, value]) => (
             <div className="recom-container" key={value}>
@@ -48,6 +63,9 @@ const App = () => {
               <span className="value">{value}</span>
             </div>
           ))}
+
+          {/* Conditionally render the arrow based on showArrow state */}
+          {showArrow && <div className="scroll-arrow">&#x25BC;</div>}
         </div>
       )}
 
