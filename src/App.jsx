@@ -10,7 +10,7 @@ const App = ()=>{
     setSearched(true) // set this to true so that i know when to show the searching block.. 
     if(anime.trim()){
       try{
-        const response = await fetch(`https://animerecombackend.onrender.com/?anime=${anime}`,{method:"GET"})
+        const response = await fetch(`https://animerecombackend.onrender.com/recommend?anime=${anime}`,{method:"GET"})
         const data = await response.json()
         setRecom(data)
       }
